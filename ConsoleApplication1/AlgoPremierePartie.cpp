@@ -84,25 +84,31 @@ void remplirCase(Grille & cobaye, int dimensionTabSudoku)
 		for(int j=0; i<dimensionTabSudoku; j++) //colonne
 		{
 			Sudoku->checkPossibilite(i,j,possible);
-			if(possible[0] != 0) //possible[0] indique le nombre de possibilités
-			{ 
-				for(int k=0; k<dimensionTabSudoku; k++) //création des résultats de sudo3D
+ 
+			for(int k=0; k<dimensionTabSudoku; k++) //création des résultats de sudo3D
+			{
+				bool present = false;
+				for(int l=1; l<=possible[0] ; l++) //Vérification de si le chiffre est présent dans la liste des possibles
 				{
-					bool present = false;
-					for(int l=1; l<=possible[0] ; l++) //Vérification de si le chiffre est présent dans la liste des possibles
-					{
-						if(possible[l] == k+1) present = true; //Si il est présent il est indiqué comme bon 
-					}
-					if (present == false) Sudo3D[i][j][k].possible = false; //Si il n'est pas présent, ça deviens false. On ne fait pas l'inverse car sinon on aurait des problèmes lors des retours en arrière
+					if(possible[l] == k+1) present = true; //Si il est présent il est indiqué comme bon 
 				}
-				combienPossible(i,j,Sudo3D,possible,dimensionTabSudoku);
+				if (present == false) Sudo3D[i][j][k].possible = false; //Si il n'est pas présent, ça deviens false. On ne fait pas l'inverse car sinon on aurait des problèmes lors des retours en arrière
+			}
+			combienPossible(i,j,Sudo3D,possible,dimensionTabSudoku);
+			if(possible[0] != 0) //possible[0] indique le nombre de possibilités
+			{
 				nb = tirerUnIntEntre(1,possible[0]); //on cherche le nombre de case à avancer
 				valcase = possible[nb];
 				Sudoku->setValeurCase(i,j,valcase);
 			}
-			else
+			else 
 			{
-				if (j==0) 
+				for(int k=0; k<(dimensionTabSudoku); k++) //Réinitialisation de la case
+				{
+					Sudo3D[i][j][k].possible = true;
+				}
+
+				if (j==0) //Retour en arrière
 				{
 					i= i-1;
 					j= dimensionTabSudoku - 1;
@@ -111,6 +117,8 @@ void remplirCase(Grille & cobaye, int dimensionTabSudoku)
 				{
 					j= j - 2;
 				}
+				int valeur = Sudoku->getValeurCase(i,j);
+				Sudo3D[i][j][valeur-1].possible = false;
 			}
 		}
 	}
