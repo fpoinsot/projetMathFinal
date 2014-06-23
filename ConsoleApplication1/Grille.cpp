@@ -369,3 +369,123 @@ CaseGrille * Grille::tirerCaseDegree(int degreEtudie)
 	//normalement jamais croisé
 	return NULL;
 }
+
+
+void Grille::checkDegreLiberte(int ligne, int colonne)
+{
+	int valeur = getCase(ligne,colonne).getValeur();
+	
+	//verifier la ligne modifiée
+	CaseGrille** resultat = new CaseGrille*[dimensionTabSudoku];
+	getLigne(ligne,resultat);
+	for(int i = 0;i<dimensionTabSudoku;i++)
+	{
+		if(resultat[i]->colonne != colonne)
+		{
+			//pour chaques case de la ligne, verifier si la valeur est dans leur pool
+			bool decrementer = true;
+			
+			int* pool = new int[dimensionTabSudoku];
+			getValeurCollone(resultat[i]->colonne,pool);
+			for(int j=0;j<dimensionTabSudoku;j++)
+			{
+				if(valeur == pool[j]) decrementer = false;
+			}
+			getValeurCarre(ligne,resultat[i]->colonne,pool);
+			for(int j=0;j<dimensionTabSudoku;j++)
+			{
+				if(valeur == pool[j]) decrementer = false;
+			}
+
+			if( decrementer == true) resultat[i]->degreLibertee++;
+			delete[] pool;
+		}
+	}
+
+	getColonne(colonne,resultat);
+	for(int i = 0;i<dimensionTabSudoku;i++)
+	{
+		if(resultat[i]->ligne != ligne)
+		{
+			//pour chaques case de la ligne, verifier si la valeur est dans leur pool
+			bool decrementer = true;
+			
+			int* pool= new int[dimensionTabSudoku];
+			getValeurLigne(resultat[i]->ligne,pool);
+			for(int j=0;j<dimensionTabSudoku;j++)
+			{
+				if(valeur == pool[j]) decrementer = false;
+			}
+			getValeurCarre(ligne,resultat[i]->ligne,pool);
+			for(int j=0;j<dimensionTabSudoku;j++)
+			{
+				if(valeur == pool[j]) decrementer = false;
+			}
+
+			if( decrementer == true) resultat[i]->degreLibertee++;
+			delete[] pool;
+		}
+	}
+
+	getCarreTronque(ligne,colonne,resultat);
+	for(int i = 0;i<dimensionTabSudoku;i++)
+	{
+		if(resultat[i] != NULL)
+		{
+			//pour chaques case de la ligne, verifier si la valeur est dans leur pool
+			bool decrementer = true;
+			
+			int* pool= new int[dimensionTabSudoku];
+			getValeurLigne(resultat[i]->ligne,pool);
+			for(int j=0;j<dimensionTabSudoku;j++)
+			{
+				if(valeur == pool[j]) decrementer = false;
+			}
+			getValeurCollone(resultat[i]->colonne,pool);
+			for(int j=0;j<dimensionTabSudoku;j++)
+			{
+				if(valeur == pool[j]) decrementer = false;
+			}
+
+			if( decrementer == true) resultat[i]->degreLibertee++;
+			delete[] pool;
+		}
+	}
+	getCase(ligne,colonne).degreLibertee++;
+
+	delete[] resultat;
+}
+
+
+
+
+void Grille::checkPossibilite(int ligne, int colonne, int* possible)
+{
+	int k = 0;
+	for(int i=0;i<dimensionTabSudoku;i++)
+	{
+		bool test = true;
+		int* pool = new int[dimensionTabSudoku];
+		getValeurLigne(ligne,pool);
+		for(int j=0;j<dimensionTabSudoku;j++)
+		{
+			if((i+1) == pool[j]) test = false;
+		}
+		getValeurCollone(colonne,pool);
+		for(int j=0;j<dimensionTabSudoku;j++)
+		{
+			if((i+1) == pool[j]) test = false;
+		}
+		getValeurCarre(ligne,colonne,pool);
+		for(int j=0;j<dimensionTabSudoku;j++)
+		{
+			if((i+1) == pool[j]) test = false;
+		}
+		if(test==true)
+		{
+			k = k+1;
+			possible[k] = i+1; 
+		}
+	}
+	possible[0] = k;
+}
