@@ -33,7 +33,7 @@ void combienPossible (int ligne, int colonne, sudoval*** Sudo3D, int* possible, 
 	int* newPossible = new int[dimensionTabSudoku];
 	for(int i=0; i<(dimensionTabSudoku);i++)
 	{
-		for (int j=1; j<=(dimensionTabSudoku);j++)
+		for (int j=1; j<=possible[0];j++)
 		{
 			if (Sudo3D[ligne][colonne][i].val == possible[j] )
 			{
@@ -48,6 +48,7 @@ void combienPossible (int ligne, int colonne, sudoval*** Sudo3D, int* possible, 
 	newPossible[0] = count;
 	initZero(possible,dimensionTabSudoku);
 	copieTableau(possible,newPossible,dimensionTabSudoku);
+	delete[] newPossible;
 }
 
 void remplirCase(Grille & cobaye, int dimensionTabSudoku)
@@ -64,6 +65,8 @@ void remplirCase(Grille & cobaye, int dimensionTabSudoku)
 	}
 	int* possible = new int[dimensionTabSudoku+1]; //+1 car on a aussi le nombre de possibilités en plus compris dans la case 0
 	int nb, valcase;
+
+	//INITIALISATION DU TABLEAU SUDO3D
 	for(int i=0; i<(dimensionTabSudoku);i++)
 	{
 		for(int j=0; j<(dimensionTabSudoku);j++)
@@ -75,6 +78,7 @@ void remplirCase(Grille & cobaye, int dimensionTabSudoku)
 			}
 		}
 	}
+
 	for(int i=0; i<(dimensionTabSudoku); i++) //ligne
 	{
 		for(int j=0; i<dimensionTabSudoku; j++) //colonne
