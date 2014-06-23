@@ -17,6 +17,8 @@ void cacherNormal(Grille & cobaye)
 			cobaye.cacherCase(ligne,colonne);
 		}
 	}while(caseG != NULL);
+
+	cobaye.afficherGrille();
 }
 
 void gommerGrille(Grille & cobaye ,std::string difficulte)
