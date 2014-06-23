@@ -16,7 +16,12 @@ int _tmain(int argc, _TCHAR* argv[])
 {
 	initialiserRand();
 
+	Grille* GrilleTest = creerGrilleTest();
+	GrilleTest->afficherGrille();
 	std::string arret;
+
+	gommerGrille(*GrilleTest,"normal");
+	GrilleTest->afficherGrille();
 	std::cin>> arret;
 	return 0;
 }

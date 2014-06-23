@@ -7,4 +7,4 @@
 
 void gommerNormal(Grille & cobaye);
 void gommerGrille(Grille & cobaye ,std::string difficulte);
-
+Grille * creerGrilleTest();

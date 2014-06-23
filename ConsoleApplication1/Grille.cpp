@@ -25,11 +25,6 @@ Grille::Grille(int paramDegre) : degre(paramDegre), dimensionTabSudoku(paramDegr
 	}
 }
 
-Grille::Grille(Grille* param):degre(param->degre), dimensionTabSudoku(param->dimensionTabSudoku), nombreCaseAfficheeEtRemplie(param->nombreCaseAfficheeEtRemplie),nombreCaseRemplie(param->nombreCaseRemplie),
-	tabSudoku(param->tabSudoku)
-{
-	
-}
 
 Grille::~Grille(void)
 {
@@ -68,6 +63,20 @@ bool Grille::setValeurCase(int ligne, int colonne, int valeur)
 	return true;
 }
 
+bool Grille::setValeurTableau(int* tabValeur)
+{
+	bool reussite = true;
+	for ( int i=0;i<dimensionTabSudoku;i++)
+	{
+		for(int j =0;j<dimensionTabSudoku;j++)
+		{
+			if (this->setValeurCase(i,j,tabValeur[i*dimensionTabSudoku + j]) == false )reussite = false;;
+		}
+	}
+	return reussite;
+}
+
+
 int Grille::getValeurCase(int ligne, int colonne)
 {
 	return getCase(ligne, colonne).getValeur();
@@ -101,7 +110,7 @@ void Grille::getValeurCarre(int ligne, int colonne,int* resultat)
 	int index = 0;	
 	for(int i = numLignePremiereCaseCarre;i<(numLignePremiereCaseCarre + degre);i++)
 	{
-		for(int j = numColonnePremiere;i<(numColonnePremiere + degre);j++)
+		for(int j = numColonnePremiere;j<(numColonnePremiere + degre);j++)
 		{
 			CaseGrille & cursor = getCase(i,j);
 			if(cursor.remplie && cursor.affichee) resultat[index]= cursor.getValeur();
@@ -118,9 +127,17 @@ void Grille::afficherGrille()
 	{
 		for(int j = 0;j<dimensionTabSudoku;j++)
 		{
-			std::cout << getCase(i,j).getValeur();
+			CaseGrille & caseG = this->getCase(i,j);
+			if ( caseG.remplie == true && caseG.affichee == true)
+			{
+				int val = caseG.getValeur();
+				std::cout << val << ' ';
+			}
+			else std::cout << "  ";
 		}
+		std::cout << std::endl;
 	}
+	std::cout << std::endl;
 }
 
 bool Grille::getAfficheCase(int ligne, int colonne){ return getCase(ligne,colonne).affichee;}
@@ -195,7 +212,7 @@ void Grille::getCarre(int ligne, int colonne,CaseGrille** resultat)
 	int index = 0;	
 	for(int i = numLignePremiereCaseCarre;i<(numLignePremiereCaseCarre + degre);i++)
 	{
-		for(int j = numColonnePremiere;i<(numColonnePremiere + degre);j++)
+		for(int j = numColonnePremiere;j<(numColonnePremiere + degre);j++)
 		{
 			CaseGrille & cursor = getCase(i,j);
 
@@ -243,7 +260,7 @@ void Grille::checkDegreLiberte(int ligne, int colonne)
 			}
 
 			if( decrementer == true) resultat[i]->degreLibertee++;
-			delete[] pool;
+			
 		}
 	}
 
@@ -268,7 +285,6 @@ void Grille::checkDegreLiberte(int ligne, int colonne)
 			}
 
 			if( decrementer == true) resultat[i]->degreLibertee++;
-			delete[] pool;
 		}
 	}
 
@@ -293,7 +309,6 @@ void Grille::checkDegreLiberte(int ligne, int colonne)
 			}
 
 			if( decrementer == true) resultat[i]->degreLibertee++;
-			delete[] pool;
 		}
 	}
 	getCase(ligne,colonne).degreLibertee++;
@@ -338,6 +353,7 @@ CaseGrille * Grille::tirerCaseDegree(int degreEtudie)
 		}
 	}
 
+	if (nbCase == 0) return NULL;
 	int alea = tirerUnIntEntre(1,nbCase);
 
 	for (int i = 0;i<dimensionTabSudoku;i++)

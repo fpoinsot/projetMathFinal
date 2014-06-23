@@ -12,11 +12,11 @@ public:
 	const int dimensionTabSudoku;// carré du degré mais bon...
 
 	Grille(int=3); // creer une grille vide degré de libertée = (degré grille)² pour chaques case
-	Grille(Grille*);
 	~Grille(void);
 
 	CaseGrille & getCase(int ligne,int colonne);  // numero de la ligne, nummero de la collone
 	bool setValeurCase(int ligne, int colonne, int valeur); //retourne true si ça c est bien passé, false sinon
+	bool setValeurTableau(int*);
 	int getValeurCase(int ligne, int colonne);
 
 	void cacherCase(int ligne, int colonne);
