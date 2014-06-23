@@ -73,6 +73,7 @@ void remplirCase(Grille & cobaye, int dimensionTabSudoku)
 		{
 			for(int k=0; k<(dimensionTabSudoku);k++)
 			{
+
 				Sudo3D[i][j][k].val = k+1;
 				Sudo3D[i][j][k].possible = true;
 			}
