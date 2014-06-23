@@ -24,8 +24,19 @@ void remplirCase(Grille & cobaye, int dimensionTabSudoku)
 				valcase = possible[nb];
 				Sudoku->setValeurCase(i,j,valcase);
 			}
+			else
+			{
+				if (j==0) 
+				{
+					i= i-1;
+					j= dimensionTabSudoku - 1;
+				}
+				else
+				{
+					j= j - 2;
+				}
+			}
 		}
 	}
-
-
+	Sudoku -> afficherGrille();
 }
