@@ -80,6 +80,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="AlgoDeuxiemePartie.h" />
+    <ClInclude Include="AlgoPremierePartie.h" />
     <ClInclude Include="CaseGrille.h" />
     <ClInclude Include="GestionRandom.h" />
     <ClInclude Include="Grille.h" />
@@ -89,6 +90,7 @@
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="AlgoDeuxiemePartie.cpp" />
+    <ClCompile Include="AlgoPremierePartie.cpp" />
     <ClCompile Include="CaseGrille.cpp" />
     <ClCompile Include="ConsoleApplication1.cpp" />
     <ClCompile Include="GestionRandom.cpp" />

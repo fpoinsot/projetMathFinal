@@ -45,5 +45,7 @@ public:
 
 private:
 	void checkDegreLiberte(int ligne, int colonne);
+public:
+	void checkPossibilite(int ligne, int colonne, int* possible);
 };
 
