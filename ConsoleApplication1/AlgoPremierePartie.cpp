@@ -11,6 +11,45 @@ struct sudoval
 	bool possible;
 };
 
+void initZero (int* possible, int dimensionTabSudoku)
+{
+	for (int i=0; i<dimensionTabSudoku; i++)
+	{
+		possible[i] = 0;
+	}
+}
+
+void copieTableau(int* possible, int* newPossible, int dimensionTabSudoku)
+{
+	for (int i=0; i<dimensionTabSudoku; i++)
+	{
+		possible[i] = newPossible[i];
+	}
+}
+
+void combienPossible (int ligne, int colonne, sudoval*** Sudo3D, int* possible, int dimensionTabSudoku)
+{
+	int count = 0;
+	int* newPossible = new int[dimensionTabSudoku];
+	for(int i=0; i<(dimensionTabSudoku);i++)
+	{
+		for (int j=1; j<=(dimensionTabSudoku);j++)
+		{
+			if (Sudo3D[ligne][colonne][i].val == possible[j] )
+			{
+				if (Sudo3D[ligne][colonne][i].possible == true)
+				{
+					count++;
+					newPossible[count] = possible[j];
+				}
+			}
+		}
+	}
+	newPossible[0] = count;
+	initZero(possible,dimensionTabSudoku);
+	copieTableau(possible,newPossible,dimensionTabSudoku);
+}
+
 void remplirCase(Grille & cobaye, int dimensionTabSudoku)
 {
 	Grille* Sudoku = new Grille[dimensionTabSudoku];
@@ -50,8 +89,9 @@ void remplirCase(Grille & cobaye, int dimensionTabSudoku)
 					{
 						if(possible[l] == k+1) present = true; //Si il est présent il est indiqué comme bon 
 					}
-					Sudo3D[i][j][k].possible = present;
+					if (present == false) Sudo3D[i][j][k].possible = false; //Si il n'est pas présent, ça deviens false. On ne fait pas l'inverse car sinon on aurait des problèmes lors des retours en arrière
 				}
+				combienPossible(i,j,Sudo3D,possible,dimensionTabSudoku);
 				nb = tirerUnIntEntre(1,possible[0]); //on cherche le nombre de case à avancer
 				valcase = possible[nb];
 				Sudoku->setValeurCase(i,j,valcase);
