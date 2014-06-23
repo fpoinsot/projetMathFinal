@@ -57,10 +57,10 @@ void remplirCase(Grille & cobaye, int dimensionTabSudoku)
 	sudoval*** Sudo3D = new sudoval**[dimensionTabSudoku];
 	for (int j = 0; j <dimensionTabSudoku;j++)
 	{
-		sudoval** Sudo3D = new sudoval*[dimensionTabSudoku];
+		Sudo3D[j] = new sudoval*[dimensionTabSudoku];
 		for ( int i = 0; i< dimensionTabSudoku;i++)
 		{
-			Sudo3D[i] = new sudoval[dimensionTabSudoku];
+			Sudo3D[j][i] = new sudoval[dimensionTabSudoku];
 		}
 	}
 	int* possible = new int[dimensionTabSudoku+1]; //+1 car on a aussi le nombre de possibilités en plus compris dans la case 0
@@ -74,7 +74,7 @@ void remplirCase(Grille & cobaye, int dimensionTabSudoku)
 			for(int k=0; k<(dimensionTabSudoku);k++)
 			{
 
-				Sudo3D[i][j][k].val = k+1;
+				((Sudo3D[i])[j])[k].val = k+1;
 				Sudo3D[i][j][k].possible = true;
 			}
 		}

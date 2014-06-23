@@ -402,3 +402,26 @@ void Grille::checkPossibilite(int ligne, int colonne, int* possible)
 	}
 	possible[0] = k;
 }
+
+double Grille::degreSensibiliteTableau()
+{
+	double moyenne=0;
+	int nbCase=0;
+	for (int i =0;i<dimensionTabSudoku;i++)
+	{
+		for (int j =0;j<dimensionTabSudoku;j++)
+		{
+			if(getCase(i,j).affichee == true && getCase(i,j).remplie == true) 
+			{
+					moyenne+= getCase(i,j).degreLibertee;
+					nbCase++;
+			}
+		}
+	}
+	return moyenne/ nbCase;
+}
+
+double Grille::degreSensibiliteCase(int ligne, int colonne)
+{
+	return 2;
+}

@@ -43,6 +43,8 @@ public:
 	void afficherGrille();
 	void verifierInitialisationDebutSecondAlgo();
 
+	double degreSensibiliteTableau();
+	double degreSensibiliteCase(int ligne,int colonne);
 private:
 	void checkDegreLiberte(int ligne, int colonne);
 public:
