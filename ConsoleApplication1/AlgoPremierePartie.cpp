@@ -30,7 +30,8 @@ void copieTableau(int* possible, int* newPossible, int dimensionTabSudoku)
 void combienPossible (int ligne, int colonne, sudoval*** Sudo3D, int* possible, int dimensionTabSudoku)
 {
 	int count = 0;
-	int* newPossible = new int[dimensionTabSudoku];
+	int* newPossible = new int[dimensionTabSudoku+1];
+	initZero(newPossible,dimensionTabSudoku);
 	for(int i=0; i<(dimensionTabSudoku);i++)
 	{
 		for (int j=1; j<=possible[0];j++)
