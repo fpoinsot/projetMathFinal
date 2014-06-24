@@ -6,7 +6,7 @@
 
 struct sudoval;
 
-void initZero (int* possible, int dimensionTabSudoku);
-void copieTableau(int* possible, int* newPossible, int dimensionTabSudoku);
-void combienPossible (int ligne, int colonne, sudoval*** Sudo3D, int* possible, int dimensionTabSudoku);
+void initZeroVerif (int* possible, int dimensionTabSudoku);
+void copieTableauVerif(int* possible, int* newPossible, int dimensionTabSudoku);
+void combienPossibleVerif (int ligne, int colonne, sudoval*** Sudo3D, int* possible, int dimensionTabSudoku);
 void resolution (Grille * cobaye, bool correct , bool unique);

@@ -26,11 +26,12 @@ int _tmain(int argc, _TCHAR* argv[])
 	GrilleTest->afficherGrille();
 	gommerGrille(*GrilleTest,"normal");
 	GrilleTest->afficherGrille();
-	std::cin>> arret;
+	
 
-	bool unique;
-	bool correct;
+	bool unique = true;
+	bool correct = true;
 	resolution(GrilleTest, correct, unique);
+	std::cin>> arret;
 	return 0;
 }
 

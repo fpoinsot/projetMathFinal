@@ -12,7 +12,7 @@ struct sudoval
 };
 
 
-void initZero (int* possible, int dimensionTabSudoku)
+void initZeroVerif (int* possible, int dimensionTabSudoku)
 {
 	for (int i=0; i<=dimensionTabSudoku; i++)
 	{
@@ -20,7 +20,7 @@ void initZero (int* possible, int dimensionTabSudoku)
 	}
 }
 
-void copieTableau(int* possible, int* newPossible, int dimensionTabSudoku)
+void copieTableauVerif(int* possible, int* newPossible, int dimensionTabSudoku)
 {
 	for (int i=0; i<=dimensionTabSudoku; i++)
 	{
@@ -28,11 +28,11 @@ void copieTableau(int* possible, int* newPossible, int dimensionTabSudoku)
 	}
 }
 
-void combienPossible (int ligne, int colonne, sudoval*** Sudo3D, int* possible, int dimensionTabSudoku)
+void combienPossibleVerif (int ligne, int colonne, sudoval*** Sudo3D, int* possible, int dimensionTabSudoku)
 {
 	int count = 0;
 	int* newPossible = new int[dimensionTabSudoku+1];
-	initZero(newPossible,dimensionTabSudoku);
+	initZeroVerif(newPossible,dimensionTabSudoku);
 	for(int i=0; i<(dimensionTabSudoku);i++)
 	{
 		for (int j=1; j<=possible[0];j++)
@@ -48,8 +48,8 @@ void combienPossible (int ligne, int colonne, sudoval*** Sudo3D, int* possible, 
 		}
 	}
 	newPossible[0] = count;
-	initZero(possible,dimensionTabSudoku);
-	copieTableau(possible,newPossible,dimensionTabSudoku);
+	initZeroVerif(possible,dimensionTabSudoku);
+	copieTableauVerif(possible,newPossible,dimensionTabSudoku);
 	delete[] newPossible;
 }
 
@@ -119,7 +119,7 @@ void resolution (Grille * cobaye, bool correct , bool unique)
 					}
 					if (present == false) Sudo3D[i][j][k].possible = false; //Si il n'est pas présent, ça deviens false. On ne fait pas l'inverse car sinon on aurait des problèmes lors des retours en arrière
 				}
-				combienPossible(i,j,Sudo3D,possible,dimensionTabSudoku);
+				combienPossibleVerif(i,j,Sudo3D,possible,dimensionTabSudoku);
 				if(possible[0] != 0) //possible[0] indique le nombre de possibilités
 				{
 					nb = tirerUnIntEntre(1,possible[0]); //on cherche le nombre de case à avancer
