@@ -13,10 +13,15 @@
 #include "AlgoPremierePartie.h"
 #include "AlgoVerif.h"
 #include <chrono>
+#include <fstream>
 
 int _tmain(int argc, _TCHAR* argv[])
 {
 	initialiserRand();
+	std::ofstream myfile;
+	myfile.open ("sortie.txt", std::ios::out);
+	myfile << "";
+	myfile.close();
 
 	Grille* GrilleTest = new Grille(3);
 	remplirCase(GrilleTest,3);

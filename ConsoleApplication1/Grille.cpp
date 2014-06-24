@@ -3,6 +3,8 @@
 #include <iostream>
 #include <random>
 #include "GestionRandom.h"
+#include <fstream>
+
 
 Grille::Grille(int paramDegre) : degre(paramDegre), dimensionTabSudoku(paramDegre*paramDegre), nombreCaseAfficheeEtRemplie(0),nombreCaseRemplie(0)
 {
@@ -123,6 +125,8 @@ void Grille::getValeurCarre(int ligne, int colonne,int* resultat)
 
 void Grille::afficherGrille()
 {
+	std::ofstream myfile;
+	myfile.open ("sortie.txt", std::ios::out | std::ios::app);
 	for(int i =0;i<dimensionTabSudoku;i++)
 	{
 		for(int j = 0;j<dimensionTabSudoku;j++)
@@ -132,12 +136,18 @@ void Grille::afficherGrille()
 			{
 				int val = caseG.getValeur();
 				std::cout << val << ' ';
+				myfile << val << ' ';
 			}
-			else std::cout << "  ";
+			else{
+				std::cout << "  ";
+				myfile << "  ";
+			}
 		}
 		std::cout << std::endl;
+		myfile << std::endl;
 	}
 	std::cout << std::endl;
+	myfile << std::endl;
 }
 
 bool Grille::getAfficheCase(int ligne, int colonne){ return getCase(ligne,colonne).affichee;}
