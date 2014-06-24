@@ -18,7 +18,6 @@ void cacherNormal(Grille & cobaye)
 			int colonne = caseG->getColonne();
 			cobaye.cacherCase(ligne,colonne);
 		}
-		cobaye.afficherGrille();
 	}while(caseG != NULL);
 }
 

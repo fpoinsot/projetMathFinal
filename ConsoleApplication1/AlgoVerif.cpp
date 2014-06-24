@@ -182,7 +182,6 @@ void resolution (Grille * cobaye, bool correct , bool unique)
 					Sudoku->faireApparaitreCase(i,j);
 					int valeur = Sudoku->getValeurCase(i,j);
 					Sudo3D[i][j][valcase-1].possible = false;
-					Sudoku -> afficherGrille();
 				}
 				else 
 				{
