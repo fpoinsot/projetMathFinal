@@ -217,7 +217,7 @@ void resolution (Grille * cobaye, bool correct , bool unique)
 			{
 				std::ofstream myfile;
 				myfile.open ("sortie.txt", std::ios::out | std::ios::app);
-				myfile << "solution en dessous " << std::endl;
+				myfile << "solution au dessus " << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
 				myfile.close();
 				nombrepossible = nombrepossible+1;
 				for(int k=0; k<(dimensionTabSudoku); k++) //Réinitialisation de la case
