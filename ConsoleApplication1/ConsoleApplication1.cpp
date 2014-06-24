@@ -11,6 +11,7 @@
 #include <random>
 #include "AlgoDeuxiemePartie.h"
 #include "AlgoPremierePartie.h"
+#include "AlgoVerif.h"
 #include <chrono>
 
 int _tmain(int argc, _TCHAR* argv[])
@@ -26,6 +27,10 @@ int _tmain(int argc, _TCHAR* argv[])
 	gommerGrille(*GrilleTest,"normal");
 	GrilleTest->afficherGrille();
 	std::cin>> arret;
+
+	bool unique;
+	bool correct;
+	resolution(GrilleTest, correct, unique);
 	return 0;
 }
 

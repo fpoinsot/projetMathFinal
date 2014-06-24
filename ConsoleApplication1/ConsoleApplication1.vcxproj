@@ -84,6 +84,7 @@
     <ClInclude Include="CaseGrille.h" />
     <ClInclude Include="GestionRandom.h" />
     <ClInclude Include="Grille.h" />
+    <ClInclude Include="AlgoVerif.h" />
     <ClInclude Include="resource.h" />
     <ClInclude Include="stdafx.h" />
     <ClInclude Include="targetver.h" />
@@ -95,6 +96,7 @@
     <ClCompile Include="ConsoleApplication1.cpp" />
     <ClCompile Include="GestionRandom.cpp" />
     <ClCompile Include="Grille.cpp" />
+    <ClCompile Include="AlgoVerif.cpp" />
     <ClCompile Include="stdafx.cpp">
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">Create</PrecompiledHeader>
       <PrecompiledHeader Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">Create</PrecompiledHeader>
