@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <chrono>
+#include <fstream>
 
 struct sudoval
 {
@@ -214,6 +215,10 @@ void resolution (Grille * cobaye, bool correct , bool unique)
 			}
 			if ((i == (dimensionTabSudoku-1)) && (j == (dimensionTabSudoku - 1)))
 			{
+				std::ofstream myfile;
+				myfile.open ("sortie.txt", std::ios::out | std::ios::app);
+				myfile << "solution en dessous " << std::endl;
+				myfile.close();
 				nombrepossible = nombrepossible+1;
 				for(int k=0; k<(dimensionTabSudoku); k++) //Réinitialisation de la case
 				{
