@@ -103,6 +103,8 @@ void remplirCase(Grille & cobaye, int degreTabSudoku)
 				nb = tirerUnIntEntre(1,possible[0]); //on cherche le nombre de case à avancer
 				valcase = possible[nb];
 				Sudoku->setValeurCase(i,j,valcase);
+				int valeur = Sudoku->getValeurCase(i,j);
+				Sudo3D[i][j][valcase-1].possible = false;
 			}
 			else 
 			{
@@ -115,22 +117,11 @@ void remplirCase(Grille & cobaye, int degreTabSudoku)
 				if (j==0) //Retour en arrière
 				{
 					i= i-1;
-					j= dimensionTabSudoku - 1;
+					j= dimensionTabSudoku - 2;
 				}
 				else
 				{
-					j= j - 1;
-				}
-				int valeur = Sudoku->getValeurCase(i,j);
-				Sudo3D[i][j][valeur-1].possible = false;
-				if (j==0) //Retour en arrière
-				{
-					i= i-1;
-					j= dimensionTabSudoku - 1;
-				}
-				else
-				{
-					j= j - 1;
+					j= j - 2;
 				}
 			}
 		}
