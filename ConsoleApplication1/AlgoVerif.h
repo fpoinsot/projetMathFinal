@@ -9,4 +9,5 @@ struct sudoval;
 void initZeroVerif (int* possible, int dimensionTabSudoku);
 void copieTableauVerif(int* possible, int* newPossible, int dimensionTabSudoku);
 void combienPossibleVerif (int ligne, int colonne, sudoval*** Sudo3D, int* possible, int dimensionTabSudoku);
+bool verifResteDesTrucs (sudoval*** Sudo3D, int dimensionTabSudoku);
 void resolution (Grille * cobaye, bool correct , bool unique);
