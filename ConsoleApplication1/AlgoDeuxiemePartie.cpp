@@ -4,6 +4,7 @@
 #include <iostream>
 #include <string>
 #include <chrono>
+#include <math.h>
 
 
 void cacherNormal(Grille & cobaye)
@@ -18,6 +19,25 @@ void cacherNormal(Grille & cobaye)
 		}
 	}while(caseG != NULL);
 }
+
+void cacherHard(Grille & cobaye)
+{
+	CaseGrille** tabDejaFait = new CaseGrille*[cobaye.dimensionTabSudoku*cobaye.dimensionTabSudoku];
+	for (int i = 0;i<cobaye.dimensionTabSudoku*cobaye.dimensionTabSudoku;i++) tabDejaFait[i]=NULL;
+
+	CaseGrille* caseG = cobaye.tirerCaseDegree(1,tabDejaFait);
+	int ligne,colonne;
+	ligne =caseG->getLigne();
+	colonne = caseG->getColonne();
+	cobaye.cacherCase(ligne,colonne);
+	double degreSensibilite = cobaye.degreSensibiliteTableau();
+	if(degreSensibilite > sqrt(cobaye.degre))
+	{
+		cobaye.faireApparaitreCase(ligne,colonne);
+	}
+
+}
+
 
 void gommerGrille(Grille & cobaye ,std::string difficulte)
 {
