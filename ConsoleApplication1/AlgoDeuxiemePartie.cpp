@@ -5,18 +5,20 @@
 #include <string>
 #include <chrono>
 #include <math.h>
-
+#include <fstream>
 
 void cacherNormal(Grille & cobaye)
 {
 	CaseGrille * caseG;
 	do{
 		caseG = cobaye.tirerCaseDegree(0);
-		if ( caseG != NULL){
+		if ( caseG != NULL)
+		{
 			int ligne = caseG->getLigne();
 			int colonne = caseG->getColonne();
 			cobaye.cacherCase(ligne,colonne);
 		}
+		cobaye.afficherGrille();
 	}while(caseG != NULL);
 }
 
@@ -46,6 +48,10 @@ void gommerGrille(Grille & cobaye ,std::string difficulte)
 		cacherNormal(cobaye);
 	}
 	else std::cout << " cette option n est pas disponible";
+	std::ofstream myfile;
+				myfile.open ("sortie.txt", std::ios::out | std::ios::app);
+				myfile << std::endl <<  "fin gommage " << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
+				myfile.close();
 }
 
 Grille* creerGrilleTest()
