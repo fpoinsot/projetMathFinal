@@ -12,6 +12,36 @@ struct sudoval
 };
 
 
+bool retourArriere (int i, int j, Grille* Sudoku, bool** original)
+{
+	int dimensionTabSudoku = Sudoku -> dimensionTabSudoku;
+	if(i==0 && j==0)
+	{
+		return false;
+	}
+	else
+	{
+		if (j==0) //Retour en arrière
+		{
+			i= i-1;
+			j= dimensionTabSudoku - 1;
+		}
+		else
+		{
+			j= j - 1;
+		}
+
+		if(original[i][j] == true)
+		{
+			return retourArriere (i,j,Sudoku,original);
+		}
+		else
+		{
+			return true;
+		}
+	}
+}
+
 void initZeroVerif (int* possible, int dimensionTabSudoku)
 {
 	for (int i=0; i<=dimensionTabSudoku; i++)
@@ -152,16 +182,6 @@ void resolution (Grille * cobaye, bool correct , bool unique)
 					int valeur = Sudoku->getValeurCase(i,j);
 					Sudo3D[i][j][valcase-1].possible = false;
 					Sudoku -> afficherGrille();
-					if (i == (dimensionTabSudoku - 1) && j == (dimensionTabSudoku - 1))
-					{
-						nombrepossible = nombrepossible+1;
-						for(int k=0; k<(dimensionTabSudoku); k++) //Réinitialisation de la case
-						{
-							Sudo3D[i][j][k].possible = true;
-							Sudoku -> gommerCase (i,j);
-						}
-						j = j - 2;
-					}
 				}
 				else 
 				{
@@ -172,22 +192,27 @@ void resolution (Grille * cobaye, bool correct , bool unique)
 						Sudoku -> gommerCase (i,j);
 					}
 
+					retourArriere(i,j,Sudoku,original);
 					if (j==0) //Retour en arrière
-					{
-						i= i-1;
-						j= dimensionTabSudoku - 2;
-					}
-					else if(j==1)
 					{
 						i= i-1;
 						j= dimensionTabSudoku - 1;
 					}
 					else
 					{
-						j= j - 2;
+						j = j - 1;
 					}
 				}
-				//verif derniere case
+			}
+			if ((i == (dimensionTabSudoku-1)) && (j == (dimensionTabSudoku - 1)))
+			{
+				nombrepossible = nombrepossible+1;
+				for(int k=0; k<(dimensionTabSudoku); k++) //Réinitialisation de la case
+				{
+					Sudo3D[i][j][k].possible = true;
+					Sudoku -> gommerCase (i,j);
+				}
+				j = j - 2;
 			}
 		}
 	}
