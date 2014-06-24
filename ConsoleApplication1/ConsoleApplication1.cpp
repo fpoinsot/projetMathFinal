@@ -19,18 +19,13 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	Grille* GrilleTest = new Grille(3);
 	remplirCase(*GrilleTest,3);
+	std::string arret;
 
 
-
-	//Grille* GrilleTest = creerGrilleTest();
-	//GrilleTest->afficherGrille();
-	//std::string arret;
-
-
-	//gommerGrille(*GrilleTest,"normal");
-	//GrilleTest->afficherGrille();
-	//std::cin>> arret;
-	//return 0;
+	gommerGrille(*GrilleTest,"normal");
+	GrilleTest->afficherGrille();
+	std::cin>> arret;
+	return 0;
 }
 
 
