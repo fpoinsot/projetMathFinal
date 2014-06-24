@@ -201,4 +201,6 @@ void resolution (Grille * cobaye, bool correct , bool unique)
 		correct = true;
 		unique = false;
 	}
+
+	std::cout << " correct : " << correct << " unique : " << unique   << std::endl;
 }
