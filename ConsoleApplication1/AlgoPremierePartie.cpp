@@ -13,7 +13,7 @@ struct sudoval
 
 void initZero (int* possible, int dimensionTabSudoku)
 {
-	for (int i=0; i<dimensionTabSudoku; i++)
+	for (int i=0; i<=dimensionTabSudoku; i++)
 	{
 		possible[i] = 0;
 	}
@@ -21,7 +21,7 @@ void initZero (int* possible, int dimensionTabSudoku)
 
 void copieTableau(int* possible, int* newPossible, int dimensionTabSudoku)
 {
-	for (int i=0; i<dimensionTabSudoku; i++)
+	for (int i=0; i<=dimensionTabSudoku; i++)
 	{
 		possible[i] = newPossible[i];
 	}
