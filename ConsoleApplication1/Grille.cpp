@@ -260,7 +260,7 @@ void Grille::checkDegreLiberte(int ligne, int colonne)
 			}
 
 			if( decrementer == true) resultat[i]->degreLibertee++;
-			
+			delete[] pool;
 		}
 	}
 
@@ -285,6 +285,7 @@ void Grille::checkDegreLiberte(int ligne, int colonne)
 			}
 
 			if( decrementer == true) resultat[i]->degreLibertee++;
+			delete[] pool;
 		}
 	}
 
@@ -309,6 +310,7 @@ void Grille::checkDegreLiberte(int ligne, int colonne)
 			}
 
 			if( decrementer == true) resultat[i]->degreLibertee++;
+			delete[] pool;
 		}
 	}
 	getCase(ligne,colonne).degreLibertee++;
@@ -411,17 +413,32 @@ double Grille::degreSensibiliteTableau()
 	{
 		for (int j =0;j<dimensionTabSudoku;j++)
 		{
-			if(getCase(i,j).affichee == true && getCase(i,j).remplie == true) 
-			{
-					moyenne+= getCase(i,j).degreLibertee;
-					nbCase++;
-			}
+			moyenne+= getCase(i,j).degreLibertee;
+			nbCase++;
 		}
 	}
 	return moyenne/ nbCase;
 }
 
-double Grille::degreSensibiliteCase(int ligne, int colonne)
+double* Grille::degreSensibiliteCase(int ligne, int colonne)
 {
-	return 2;
+	double* tabDegre = new double[3];
+	for (int i = 0;i<3;i++) tabDegre[i]=0;
+	CaseGrille** resultat = new CaseGrille*[dimensionTabSudoku];
+	getLigne(ligne,resultat);
+
+	for (int i = 0;i<dimensionTabSudoku;i++)	tabDegre[0]+=resultat[i]->degreLibertee;
+	tabDegre[0]= tabDegre[0]/dimensionTabSudoku;
+
+	getColonne(colonne,resultat);
+	for(int i =0;i<dimensionTabSudoku;i++)	tabDegre[1]+= resultat[i]->degreLibertee;
+	tabDegre[1] = tabDegre[1]/dimensionTabSudoku;
+
+	getCarre(ligne,colonne,resultat);
+	for (int i=0;i<dimensionTabSudoku;i++) tabDegre[2]+=resultat[i]->degreLibertee;
+	tabDegre[2] = tabDegre[2]/dimensionTabSudoku;
+
+	delete[] resultat;
+
+	return tabDegre;
 }

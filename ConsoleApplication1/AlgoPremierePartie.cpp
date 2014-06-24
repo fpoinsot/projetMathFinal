@@ -100,7 +100,7 @@ void remplirCase(Grille * cobaye, int degreTabSudoku)
 			combienPossible(i,j,Sudo3D,possible,dimensionTabSudoku);
 			if(possible[0] != 0) //possible[0] indique le nombre de possibilités
 			{
-				Sudoku -> afficherGrille();
+				
 				nb = tirerUnIntEntre(1,possible[0]); //on cherche le nombre de case à avancer
 				valcase = possible[nb];
 				Sudoku->setValeurCase(i,j,valcase);
@@ -134,7 +134,6 @@ void remplirCase(Grille * cobaye, int degreTabSudoku)
 			}
 		}
 	}
-	Sudoku -> afficherGrille();
 }
 
 //detete[] sudo3D;

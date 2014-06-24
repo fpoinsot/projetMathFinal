@@ -44,7 +44,7 @@ public:
 	void verifierInitialisationDebutSecondAlgo();
 
 	double degreSensibiliteTableau();
-	double degreSensibiliteCase(int ligne,int colonne);
+	double* degreSensibiliteCase(int ligne,int colonne);
 private:
 	void checkDegreLiberte(int ligne, int colonne);
 public:
