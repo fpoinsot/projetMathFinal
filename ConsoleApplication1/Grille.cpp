@@ -290,7 +290,7 @@ void Grille::checkDegreLiberte(int ligne, int colonne)
 			{
 				if(valeur == pool[j]) decrementer = false;
 			}
-			getValeurCarre(ligne,resultat[i]->ligne,pool);
+			getValeurCarre(resultat[i]->ligne,colonne,pool);
 			for(int j=0;j<dimensionTabSudoku;j++)
 			{
 				if(valeur == pool[j]) decrementer = false;
