@@ -21,7 +21,7 @@ int _tmain(int argc, _TCHAR* argv[])
 	remplirCase(GrilleTest,3);
 	std::string arret;
 
-	std::cout << "grille complete";
+	std::cout << "grille complete" << std::endl;
 	GrilleTest->afficherGrille();
 	gommerGrille(*GrilleTest,"normal");
 	GrilleTest->afficherGrille();
