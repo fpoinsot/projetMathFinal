@@ -119,6 +119,11 @@ void remplirCase(Grille & cobaye, int degreTabSudoku)
 					i= i-1;
 					j= dimensionTabSudoku - 2;
 				}
+				else if(j==1)
+				{
+					i= i-1;
+					j= dimensionTabSudoku - 1;
+				}
 				else
 				{
 					j= j - 2;
