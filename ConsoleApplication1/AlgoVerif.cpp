@@ -220,7 +220,24 @@ void resolution (Grille * cobaye, bool correct , bool unique)
 					Sudo3D[i][j][k].possible = true;
 					Sudoku -> gommerCase (i,j);
 				}
-				j = j - 2;
+				bool test = retourArriere(&i,&j,Sudoku,original); //Retour en arrière
+				if(test == false)
+				{
+					i = dimensionTabSudoku;
+					j = dimensionTabSudoku;
+				}
+				else
+				{
+					if (j==0) 
+					{
+						i= i-1;
+						j= dimensionTabSudoku - 1;
+					}
+					else
+					{
+						j = j - 1;
+					}
+				}
 			}
 		}
 	}
