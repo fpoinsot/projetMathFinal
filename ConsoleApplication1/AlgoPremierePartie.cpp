@@ -106,13 +106,15 @@ void remplirCase(Grille & cobaye, int degreTabSudoku)
 				Sudoku->setValeurCase(i,j,valcase);
 				int valeur = Sudoku->getValeurCase(i,j);
 				Sudo3D[i][j][valcase-1].possible = false;
+				Sudoku -> afficherGrille();
 			}
 			else 
 			{
-				Sudoku -> afficherGrille();
+				
 				for(int k=0; k<(dimensionTabSudoku); k++) //Réinitialisation de la case
 				{
 					Sudo3D[i][j][k].possible = true;
+					Sudoku -> gommerCase (i,j);
 				}
 
 				if (j==0) //Retour en arrière
