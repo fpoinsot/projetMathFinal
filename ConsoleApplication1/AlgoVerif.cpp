@@ -220,10 +220,13 @@ void resolution (Grille * cobaye, bool correct , bool unique)
 				myfile << "solution au dessus " << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl << std::endl;
 				myfile.close();
 				nombrepossible = nombrepossible+1;
-				for(int k=0; k<(dimensionTabSudoku); k++) //Réinitialisation de la case
+				if(original[i][j]==false)
 				{
-					Sudo3D[i][j][k].possible = true;
-					Sudoku -> gommerCase (i,j);
+					for(int k=0; k<(dimensionTabSudoku); k++) //Réinitialisation de la case
+					{
+						Sudo3D[i][j][k].possible = true;
+						Sudoku -> gommerCase (i,j);
+					}
 				}
 				bool test = retourArriere(&i,&j,Sudoku,original); //Retour en arrière
 				if(test == false)
