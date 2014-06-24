@@ -15,20 +15,20 @@ struct sudoval
 bool retourArriere (int* i, int* j, Grille* Sudoku, bool** original)
 {
 	int dimensionTabSudoku = Sudoku -> dimensionTabSudoku;
-	if(i==0 && j==0)
+	if(*i==0 && *j==0)
 	{
 		return false;
 	}
 	else
 	{
-		if (j==0) //Retour en arrière
+		if (*j==0) //Retour en arrière
 		{
-			i= i-1;
-			j= dimensionTabSudoku - 1;
+			*i= *i-1;
+			*j= dimensionTabSudoku - 1;
 		}
 		else
 		{
-			j= j - 1;
+			*j= *j - 1;
 		}
 
 		if(original[*i][*j] == true)
