@@ -241,5 +241,5 @@ void resolution (Grille * cobaye, bool correct , bool unique)
 		unique = false;
 	}
 
-	std::cout << " correct : " << correct << " unique : " << unique   << std::endl;
+	std::cout <<"nombre de possibilite : " << nombrepossible << " correct : " << correct << " unique : " << unique   << std::endl;
 }
