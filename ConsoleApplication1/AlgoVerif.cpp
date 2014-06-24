@@ -192,15 +192,23 @@ void resolution (Grille * cobaye, bool correct , bool unique)
 						Sudoku -> gommerCase (i,j);
 					}
 
-					retourArriere(&i,&j,Sudoku,original);
-					if (j==0) //Retour en arrière
+					bool test = retourArriere(&i,&j,Sudoku,original); //Retour en arrière
+					if(test == false)
 					{
-						i= i-1;
-						j= dimensionTabSudoku - 1;
+						i = dimensionTabSudoku;
+						j = dimensionTabSudoku;
 					}
 					else
 					{
-						j = j - 1;
+						if (j==0) 
+						{
+							i= i-1;
+							j= dimensionTabSudoku - 1;
+						}
+						else
+						{
+							j = j - 1;
+						}
 					}
 				}
 			}
