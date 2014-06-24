@@ -12,7 +12,7 @@ struct sudoval
 };
 
 
-bool retourArriere (int i, int j, Grille* Sudoku, bool** original)
+bool retourArriere (int* i, int* j, Grille* Sudoku, bool** original)
 {
 	int dimensionTabSudoku = Sudoku -> dimensionTabSudoku;
 	if(i==0 && j==0)
@@ -31,7 +31,7 @@ bool retourArriere (int i, int j, Grille* Sudoku, bool** original)
 			j= j - 1;
 		}
 
-		if(original[i][j] == true)
+		if(original[*i][*j] == true)
 		{
 			return retourArriere (i,j,Sudoku,original);
 		}
@@ -192,7 +192,7 @@ void resolution (Grille * cobaye, bool correct , bool unique)
 						Sudoku -> gommerCase (i,j);
 					}
 
-					retourArriere(i,j,Sudoku,original);
+					retourArriere(&i,&j,Sudoku,original);
 					if (j==0) //Retour en arrière
 					{
 						i= i-1;
