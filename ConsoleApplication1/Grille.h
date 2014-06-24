@@ -1,5 +1,6 @@
 #pragma once
 #include "CaseGrille.h"
+#include "stdafx.h"
 
 class Grille
 {
@@ -38,7 +39,7 @@ public:
 	void getCarreTronque(int ligne, int colonne, CaseGrille** resultat);
 
 	CaseGrille & tirerCaseRemplieEtAffichee();
-	CaseGrille * tirerCaseDegree(int);
+	CaseGrille * tirerCaseDegree(int,CaseGrille** = NULL);
 
 	void afficherGrille();
 	void verifierInitialisationDebutSecondAlgo();
@@ -47,6 +48,7 @@ public:
 	double* degreSensibiliteCase(int ligne,int colonne);
 private:
 	void checkDegreLiberte(int ligne, int colonne);
+	void checkDegreLiberteApparrition(int ligne, int colonne);
 public:
 	void checkPossibilite(int ligne, int colonne, int* possible);
 };

@@ -162,6 +162,8 @@ void Grille::faireApparaitreCase(int ligne, int colonne)
 	if(cursor.affichee) return; //pas d interet
 	cursor.affichee = true;
 	nombreCaseAfficheeEtRemplie++;
+
+	checkDegreLiberteApparrition(ligne,colonne);
 }
 
 void Grille::cacherCase(int ligne, int colonne)
@@ -318,6 +320,91 @@ void Grille::checkDegreLiberte(int ligne, int colonne)
 	delete[] resultat;
 }
 
+void Grille::checkDegreLiberteApparrition(int ligne, int colonne)
+{
+	int valeur = getCase(ligne,colonne).getValeur();
+	
+	//verifier la ligne modifiée
+	CaseGrille** resultat = new CaseGrille*[dimensionTabSudoku];
+	getLigne(ligne,resultat);
+	for(int i = 0;i<dimensionTabSudoku;i++)
+	{
+		if(resultat[i]->colonne != colonne)
+		{
+			//pour chaques case de la ligne, verifier si la valeur est dans leur pool
+			bool decrementer = true;
+			
+			int* pool = new int[dimensionTabSudoku];
+			getValeurCollone(resultat[i]->colonne,pool);
+			for(int j=0;j<dimensionTabSudoku;j++)
+			{
+				if(valeur == pool[j]) decrementer = false;
+			}
+			getValeurCarre(ligne,resultat[i]->colonne,pool);
+			for(int j=0;j<dimensionTabSudoku;j++)
+			{
+				if(valeur == pool[j]) decrementer = false;
+			}
+
+			if( decrementer == true) resultat[i]->degreLibertee--;
+			delete[] pool;
+		}
+	}
+
+	getColonne(colonne,resultat);
+	for(int i = 0;i<dimensionTabSudoku;i++)
+	{
+		if(resultat[i]->ligne != ligne)
+		{
+			//pour chaques case de la ligne, verifier si la valeur est dans leur pool
+			bool decrementer = true;
+			
+			int* pool= new int[dimensionTabSudoku];
+			getValeurLigne(resultat[i]->ligne,pool);
+			for(int j=0;j<dimensionTabSudoku;j++)
+			{
+				if(valeur == pool[j]) decrementer = false;
+			}
+			getValeurCarre(ligne,resultat[i]->ligne,pool);
+			for(int j=0;j<dimensionTabSudoku;j++)
+			{
+				if(valeur == pool[j]) decrementer = false;
+			}
+
+			if( decrementer == true) resultat[i]->degreLibertee--;
+			delete[] pool;
+		}
+	}
+
+	getCarreTronque(ligne,colonne,resultat);
+	for(int i = 0;i<dimensionTabSudoku;i++)
+	{
+		if(resultat[i] != NULL)
+		{
+			//pour chaques case de la ligne, verifier si la valeur est dans leur pool
+			bool decrementer = true;
+			
+			int* pool= new int[dimensionTabSudoku];
+			getValeurLigne(resultat[i]->ligne,pool);
+			for(int j=0;j<dimensionTabSudoku;j++)
+			{
+				if(valeur == pool[j]) decrementer = false;
+			}
+			getValeurCollone(resultat[i]->colonne,pool);
+			for(int j=0;j<dimensionTabSudoku;j++)
+			{
+				if(valeur == pool[j]) decrementer = false;
+			}
+
+			if( decrementer == true) resultat[i]->degreLibertee--;
+			delete[] pool;
+		}
+	}
+	getCase(ligne,colonne).degreLibertee--;
+
+	delete[] resultat;
+}
+
 void Grille::verifierInitialisationDebutSecondAlgo(){
 
 	bool degreLiberteOk = true;
@@ -343,7 +430,7 @@ void Grille::verifierInitialisationDebutSecondAlgo(){
 	else std::cout << "nombre de case remplie OK" << std::endl;
 }
 
-CaseGrille * Grille::tirerCaseDegree(int degreEtudie)
+CaseGrille * Grille::tirerCaseDegree(int degreEtudie,CaseGrille** tabDejaFait )
 {
 	int nbCase=0;
 	for (int i = 0;i<dimensionTabSudoku;i++)
