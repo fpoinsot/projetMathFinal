@@ -18,10 +18,11 @@ int _tmain(int argc, _TCHAR* argv[])
 	initialiserRand();
 
 	Grille* GrilleTest = new Grille(3);
-	remplirCase(*GrilleTest,3);
+	remplirCase(GrilleTest,3);
 	std::string arret;
 
-
+	std::cout << "grille complete";
+	GrilleTest->afficherGrille();
 	gommerGrille(*GrilleTest,"normal");
 	GrilleTest->afficherGrille();
 	std::cin>> arret;
