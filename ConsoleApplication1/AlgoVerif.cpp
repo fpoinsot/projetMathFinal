@@ -125,6 +125,7 @@ void resolution (Grille * cobaye, bool correct , bool unique)
 					nb = tirerUnIntEntre(1,possible[0]); //on cherche le nombre de case à avancer
 					valcase = possible[nb];
 					Sudoku->setValeurCase(i,j,valcase);
+					Sudoku->faireApparaitreCase(i,j);
 					int valeur = Sudoku->getValeurCase(i,j);
 					Sudo3D[i][j][valcase-1].possible = false;
 					Sudoku -> afficherGrille();
@@ -140,7 +141,7 @@ void resolution (Grille * cobaye, bool correct , bool unique)
 
 					if (j==0) //Retour en arrière
 					{
-						i= i-1;
+					    i= i-1;
 						j= dimensionTabSudoku - 2;
 					}
 					else if(j==1)
