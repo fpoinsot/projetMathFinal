@@ -30,7 +30,7 @@ int _tmain(int argc, _TCHAR* argv[])
 
 	bool unique = true;
 	bool correct = true;
-	//resolution(GrilleTest, correct, unique);
+	resolution(GrilleTest, correct, unique);
 	std::cin>> arret;
 	return 0;
 }

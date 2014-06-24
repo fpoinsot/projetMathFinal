@@ -125,65 +125,71 @@ void resolution (Grille * cobaye, bool correct , bool unique)
 	int nb, valcase;
 	bool restedestrucs = true;
 
-	while(restedestrucs == true)
+	for(int i=0; i<(dimensionTabSudoku); i++) //ligne
 	{
-		for(int i=0; i<(dimensionTabSudoku); i++) //ligne
+		for(int j=0; j<dimensionTabSudoku; j++) //colonne
 		{
-			for(int j=0; j<dimensionTabSudoku; j++) //colonne
-			{
 
-				if(original[i][j] == false) //on saute les valeurs "originales" elles ne seront jamais touchées.
+			if(original[i][j] == false) //on saute les valeurs "originales" elles ne seront jamais touchées.
+			{
+				Sudoku->checkPossibilite(i,j,possible);
+				for(int k=0; k<dimensionTabSudoku; k++) //création des résultats de sudo3D
 				{
-					Sudoku->checkPossibilite(i,j,possible);
-					for(int k=0; k<dimensionTabSudoku; k++) //création des résultats de sudo3D
+					bool present = false;
+					for(int l=1; l<=possible[0] ; l++) //Vérification de si le chiffre est présent dans la liste des possibles
 					{
-						bool present = false;
-						for(int l=1; l<=possible[0] ; l++) //Vérification de si le chiffre est présent dans la liste des possibles
-						{
-							if(possible[l] == k+1) present = true; //Si il est présent il est indiqué comme bon 
-						}
-						if (present == false) Sudo3D[i][j][k].possible = false; //Si il n'est pas présent, ça deviens false. On ne fait pas l'inverse car sinon on aurait des problèmes lors des retours en arrière
+						if(possible[l] == k+1) present = true; //Si il est présent il est indiqué comme bon 
 					}
-					combienPossibleVerif(i,j,Sudo3D,possible,dimensionTabSudoku);
-					if(possible[0] != 0) //possible[0] indique le nombre de possibilités
+					if (present == false) Sudo3D[i][j][k].possible = false; //Si il n'est pas présent, ça deviens false. On ne fait pas l'inverse car sinon on aurait des problèmes lors des retours en arrière
+				}
+				combienPossibleVerif(i,j,Sudo3D,possible,dimensionTabSudoku);
+				if(possible[0] != 0) //possible[0] indique le nombre de possibilités
+				{
+					nb = tirerUnIntEntre(1,possible[0]); //on cherche le nombre de case à avancer
+					valcase = possible[nb];
+					Sudoku->setValeurCase(i,j,valcase);
+					Sudoku->faireApparaitreCase(i,j);
+					int valeur = Sudoku->getValeurCase(i,j);
+					Sudo3D[i][j][valcase-1].possible = false;
+					Sudoku -> afficherGrille();
+					if (i == (dimensionTabSudoku - 1) && j == (dimensionTabSudoku - 1))
 					{
-						nb = tirerUnIntEntre(1,possible[0]); //on cherche le nombre de case à avancer
-						valcase = possible[nb];
-						Sudoku->setValeurCase(i,j,valcase);
-						Sudoku->faireApparaitreCase(i,j);
-						int valeur = Sudoku->getValeurCase(i,j);
-						Sudo3D[i][j][valcase-1].possible = false;
-						Sudoku -> afficherGrille();
-					}
-					else 
-					{
-				
+						nombrepossible = nombrepossible+1;
 						for(int k=0; k<(dimensionTabSudoku); k++) //Réinitialisation de la case
 						{
 							Sudo3D[i][j][k].possible = true;
 							Sudoku -> gommerCase (i,j);
 						}
-
-						if (j==0) //Retour en arrière
-						{
-							i= i-1;
-							j= dimensionTabSudoku - 2;
-						}
-						else if(j==1)
-						{
-							i= i-1;
-							j= dimensionTabSudoku - 1;
-						}
-						else
-						{
-							j= j - 2;
-						}
+						j = j - 2;
 					}
 				}
+				else 
+				{
+				
+					for(int k=0; k<(dimensionTabSudoku); k++) //Réinitialisation de la case
+					{
+						Sudo3D[i][j][k].possible = true;
+						Sudoku -> gommerCase (i,j);
+					}
+
+					if (j==0) //Retour en arrière
+					{
+						i= i-1;
+						j= dimensionTabSudoku - 2;
+					}
+					else if(j==1)
+					{
+						i= i-1;
+						j= dimensionTabSudoku - 1;
+					}
+					else
+					{
+						j= j - 2;
+					}
+				}
+				//verif derniere case
 			}
 		}
-		nombrepossible = nombrepossible+1;
-		restedestrucs = verifResteDesTrucs(Sudo3D, dimensionTabSudoku);
 	}
 
 	if (nombrepossible==0)
