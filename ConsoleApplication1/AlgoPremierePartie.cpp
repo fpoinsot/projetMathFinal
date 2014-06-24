@@ -52,9 +52,10 @@ void combienPossible (int ligne, int colonne, sudoval*** Sudo3D, int* possible, 
 	delete[] newPossible;
 }
 
-void remplirCase(Grille & cobaye, int dimensionTabSudoku)
+void remplirCase(Grille & cobaye, int degreTabSudoku)
 {
-	Grille* Sudoku = new Grille[dimensionTabSudoku];
+	int dimensionTabSudoku = degreTabSudoku*degreTabSudoku;
+	Grille* Sudoku = new Grille[degreTabSudoku];
 	sudoval*** Sudo3D = new sudoval**[dimensionTabSudoku];
 	for (int j = 0; j <dimensionTabSudoku;j++)
 	{
@@ -105,6 +106,7 @@ void remplirCase(Grille & cobaye, int dimensionTabSudoku)
 			}
 			else 
 			{
+				Sudoku -> afficherGrille();
 				for(int k=0; k<(dimensionTabSudoku); k++) //Réinitialisation de la case
 				{
 					Sudo3D[i][j][k].possible = true;
