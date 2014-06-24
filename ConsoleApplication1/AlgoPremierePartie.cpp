@@ -119,10 +119,19 @@ void remplirCase(Grille & cobaye, int degreTabSudoku)
 				}
 				else
 				{
-					j= j - 2;
+					j= j - 1;
 				}
 				int valeur = Sudoku->getValeurCase(i,j);
 				Sudo3D[i][j][valeur-1].possible = false;
+				if (j==0) //Retour en arrière
+				{
+					i= i-1;
+					j= dimensionTabSudoku - 1;
+				}
+				else
+				{
+					j= j - 1;
+				}
 			}
 		}
 	}
