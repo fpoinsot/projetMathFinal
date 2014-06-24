@@ -213,7 +213,7 @@ void resolution (Grille * cobaye, bool correct , bool unique)
 					}
 				}
 			}
-			if ((i == (dimensionTabSudoku-1)) && (j == (dimensionTabSudoku - 1)))
+			if (((i == (dimensionTabSudoku-1)) && (j == (dimensionTabSudoku - 1))) && ((original[i][j]==true) || (possible[0]>0)))
 			{
 				std::ofstream myfile;
 				myfile.open ("sortie.txt", std::ios::out | std::ios::app);
