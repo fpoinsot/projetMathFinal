@@ -83,7 +83,7 @@ void remplirCase(Grille & cobaye, int dimensionTabSudoku)
 
 	for(int i=0; i<(dimensionTabSudoku); i++) //ligne
 	{
-		for(int j=0; i<dimensionTabSudoku; j++) //colonne
+		for(int j=0; j<dimensionTabSudoku; j++) //colonne
 		{
 			Sudoku->checkPossibilite(i,j,possible);
  
